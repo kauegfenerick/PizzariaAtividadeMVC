@@ -1,10 +1,10 @@
-﻿using PizzariaMVCAtivdade.Controllers.Inferfaces;
+﻿using PizzariaMVCAtivdade.Models.Inferfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PizzariaMVCAtivdade.Controllers
+namespace PizzariaMVCAtivdade.Models
 {
     public class Pizza : IEntidade
     {
@@ -29,6 +29,8 @@ namespace PizzariaMVCAtivdade.Controllers
         public DateTime DataAlteracao { get; set; }
 
         // Fim do contrato entidade
+
+        public string Nome { get; set; }
 
         public string  FotoURL { get; set; }
 

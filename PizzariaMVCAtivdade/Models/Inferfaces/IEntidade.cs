@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PizzariaMVCAtivdade.Controllers.Inferfaces
+namespace PizzariaMVCAtivdade.Models.Inferfaces
 {
     public interface IEntidade 
     {

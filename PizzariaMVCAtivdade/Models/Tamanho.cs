@@ -1,9 +1,11 @@
-﻿using System;
+﻿using PizzariaMVCAtivdade.Models;
+using PizzariaMVCAtivdade.Models.Inferfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PizzariaMVCAtivdade.Controllers.Inferfaces
+namespace PizzariaMVCAtivdade.Models
 {
     public class Tamanho : IEntidade
     {
