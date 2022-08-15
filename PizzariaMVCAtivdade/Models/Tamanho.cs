@@ -17,5 +17,10 @@ namespace PizzariaMVCAtivdade.Controllers.Inferfaces
 
         // Fim do contrato entidade
 
+        public string Nome { get; set; }
+
+        public List<Pizza> Pizzas { get; set; }
+
+
     }
 }

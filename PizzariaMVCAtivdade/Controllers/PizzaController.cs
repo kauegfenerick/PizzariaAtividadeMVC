@@ -8,10 +8,16 @@ namespace PizzariaMVCAtivdade.Controllers
 {
     public class PizzaController : Controller
     {
+        private PizzariaDbContext _context;
+
+        public PizzaController(PizzariaDbContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Pizzas);
         }
     }
 }

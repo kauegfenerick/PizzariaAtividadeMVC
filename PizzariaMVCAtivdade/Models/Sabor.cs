@@ -17,5 +17,8 @@ namespace PizzariaMVCAtivdade.Controllers
 
         // Fim do contrato entidade
 
+        public string Nome { get; set; }
+
+        public List<PizzaSabor> PizzaSabores { get; set; }
     }
 }
