@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PizzariaMVCAtivdade.Controllers;
-using PizzariaMVCAtivdade.Controllers.Inferfaces;
 using System;
+using PizzariaMVCAtivdade.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PizzariaMVCAtivdade.Controllers.Inferfaces;
+using PizzariaMVCAtivdade.Controllers;
 
 namespace PizzariaMVCAtivdade
 {
