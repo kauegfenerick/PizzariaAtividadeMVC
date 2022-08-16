@@ -1,53 +1,50 @@
 ﻿@model IEnumerable<Pizza>
 
-@{
-    ViewData["Title"] = "Índice Atores";
-}
-
-<partial name="_NovoItem" model="nameof(Pizza)" />
+<partial name="_Btn_cadastrar" model="nameof(Pizza)" />
 
 <div class="row">
     <div class="col-md-10 offset-md-1">
         <div class="col-12 my-2">
-            <input class="form-control" type="text" name="nome" id="nome" placeholder="Buscar ator ou atriz... " />
+            <input class="form-control" type="text" name="nome" id="nome" placeholder="Buscar pizza... " />
         </div>
 
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Ações</th>
-                    <th>@Html.DisplayNameFor(model => model.FotoURL)</th>
-                    <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ator in Model)
+                @foreach (var pizza in Model)
                 {
 
                     <tr>
                         <td>
                             <div class="d-flex flex-column">
-                                <a class="btn btn-success" asp-action="Atualizar" asp-route-id="@ator.Id">
+                                <a class="btn btn-success" asp-action="Atualizar" asp-route-id="@pizza.Id">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                     Editar
                                 </a>
 
-                                <a class="btn btn-primary mt-1" asp-action="Detalhes" asp-route-id="@ator.Id">
+                                <a class="btn btn-primary mt-1" asp-action="Detalhes" asp-route-id="@pizza.Id">
                                     <i class="fa-solid fa-eye"></i>
                                     Ver
                                 </a>
 
-                                <a class="btn btn-danger mt-1" asp-action="Deletar" asp-route-id="@ator.Id">
+                                <a class="btn btn-danger mt-1" asp-action="Deletar" asp-route-id="@pizza.Id">
                                     <i class="fa-solid fa-trash-can"></i>
                                     Excluir
                                 </a>
                             </div>
                         </td>
                         <td class="align-middle">
-                            <img src="@ator.FotoURL" style="max-width:100px" alt="@ator.Nome">
+                            <img src="@pizza.FotoURL" style="max-width:100px" alt="@pizza.Nome">
                         </td>
-                        <td class="align-middle">@ator.Nome</td>
-                        <td class="align-middle">@ator.Tamanho</td>
+                        <td class="align-middle">@pizza.Nome</td>
+                        <td class="align-middle">@pizza.Preco</td>
                     </tr>
                 }
             </tbody>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PizzariaMVCAtivdade.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,16 @@ namespace PizzariaMVCAtivdade.Controllers
         public IActionResult Index()
         {
             return View(_context.Tamanhos);
+        }
+        public IActionResult Criar() => View();
+
+        [HttpPost]
+        public IActionResult Criar(Tamanho tamanho)
+        {
+            Tamanho c1 = new(tamanho.Nome);
+            _context.Tamanhos.Add(c1);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

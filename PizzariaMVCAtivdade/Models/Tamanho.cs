@@ -9,6 +9,13 @@ namespace PizzariaMVCAtivdade.Models
 {
     public class Tamanho : IEntidade
     {
+        public Tamanho(string nome)
+        {
+            Nome = nome;
+            DataCadastro = DateTime.Now;
+            DataAlteracao = DataCadastro;
+        }
+
         // Contrato entidade
 
         public int Id { get; set; }
@@ -23,6 +30,12 @@ namespace PizzariaMVCAtivdade.Models
 
         public List<Pizza> Pizzas { get; set; }
 
+
+        public void AtualizarDados(string nome)
+        {
+            Nome = nome;
+            DataAlteracao = DateTime.Now;
+        }
 
     }
 }

@@ -8,19 +8,27 @@ namespace PizzariaMVCAtivdade.Models
 {
     public class Pizza : IEntidade
     {
-        //public Pizza(int id, string fotoURL, decimal preco, Tamanho tamanho, int tamanhoId, List<PizzaSabor> pizzaSabores)
-        //{
-        //    Id = id;
-        //    DataCadastro = DateTime.Now;
-        //    DataAlteracao = DataCadastro;
-        //    FotoURL = fotoURL;
-        //    Preco = preco;
-        //    Tamanho = tamanho;
-        //    TamanhoId = tamanhoId;
-        //    PizzaSabores = pizzaSabores;
-        //}
+        public Pizza(string fotoURL, decimal preco, Tamanho tamanho, int tamanhoId, List<PizzaSabor> pizzaSabores)
+        {
+            DataCadastro = DateTime.Now;
+            DataAlteracao = DataCadastro;
+            FotoURL = fotoURL;
+            Preco = preco;
+            Tamanho = tamanho;
+            TamanhoId = tamanhoId;
+            PizzaSabores = pizzaSabores;
+        }
 
-        // Contrato entidade
+        public Pizza( string nome, string fotoURL, decimal preco)
+        {
+            DataCadastro = DateTime.Now;
+            DataAlteracao = DataCadastro;
+            Nome = nome;
+            FotoURL = fotoURL;
+            Preco = preco;
+        }
+
+        //Contrato entidade
 
         public int Id { get; set; }
         
@@ -40,7 +48,7 @@ namespace PizzariaMVCAtivdade.Models
 
         public int TamanhoId { get; set; }
 
-        // public List<PizzaSabor> PizzaSabores { get; set; }
+         public List<PizzaSabor> PizzaSabores { get; set; }
 
 
 
