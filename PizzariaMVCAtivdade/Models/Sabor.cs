@@ -7,6 +7,13 @@ namespace PizzariaMVCAtivdade.Models
 {
     public class Sabor
     {
+        public Sabor(string nome)
+        {
+            DataCadastro = DateTime.Now;
+            DataAlteracao = DataCadastro;
+            Nome = nome;
+        }
+
         // Contrato entidade
 
         public int Id { get; set; }
