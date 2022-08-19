@@ -1,17 +1,18 @@
-﻿using System;
+﻿using PizzariaMVCAtivdade.Models.Inferfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PizzariaMVCAtivdade.Models
 {
-    public class Sabor
+    public class Sabor : IEntidade
     {
         public Sabor(string nome)
         {
             DataCadastro = DateTime.Now;
             DataAlteracao = DataCadastro;
-            Nome = nome;
+            Nome = nome;       
         }
 
         // Contrato entidade
@@ -27,5 +28,11 @@ namespace PizzariaMVCAtivdade.Models
         public string Nome { get; set; }
 
         public List<PizzaSabor> PizzaSabores { get; set; }
+
+        public void AtualizarDados(string nome)
+        {
+            Nome = nome;
+            DataAlteracao = DateTime.Now;
+        }
     }
 }

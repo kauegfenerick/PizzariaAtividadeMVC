@@ -28,7 +28,35 @@ namespace PizzariaMVCAtivdade.Controllers
         {
             Tamanho c1 = new(tamanhoDto.Nome);
             _context.Tamanhos.Add(c1);
-            _context.SaveChanges();
+            _context.SaveChanges(); ;
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Atualizar(int id)
+        {
+            var result = _context.Tamanhos.FirstOrDefault(s => s.Id == id);
+            return View(result);
+        }
+
+        [HttpPost, ActionName("Atualizar")]
+        public IActionResult ConfirmarAtualizar(int id, PostTamanhoDTO tamanhoDto)
+        {
+            var result = _context.Tamanhos.FirstOrDefault(t => t.Id == id);
+            result.AtualizarDados(tamanhoDto.Nome);
+            _context.Tamanhos.Update(result);
+            _context.SaveChanges(); ;
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Deletar(int id)
+        {
+            var result = _context.Tamanhos.FirstOrDefault(s => s.Id == id);
+            return View(result);
+        }
+        [HttpPost, ActionName("Deletar")]
+        public IActionResult ConfirmarDeletar(int id)
+        {
+            var result = _context.Tamanhos.FirstOrDefault(t => t.Id == id);
+            _context.Tamanhos.Remove(result);
+            _context.SaveChanges(); ;
             return RedirectToAction(nameof(Index));
         }
     }
