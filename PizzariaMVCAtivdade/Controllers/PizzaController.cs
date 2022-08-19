@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PizzariaMVCAtivdade.Models;
 using PizzariaMVCAtivdade.Models.ViewModels;
 using System;
@@ -26,16 +27,46 @@ namespace PizzariaMVCAtivdade.Controllers
             var result = _context.Pizzas.FirstOrDefault(x => x.Id == id);
             return View(result);
         }
-        public IActionResult Criar() => View();
+        public IActionResult Criar(int id)
+        {
+            DadosDropDown();
+            return View();
+        }
 
         [HttpPost, ActionName("Criar")]
         public IActionResult CriarConfirmar(PostPizzaDTO pizzaDto)
         {
-            Pizza p1 = new Pizza(pizzaDto.Nome,pizzaDto.FotoURL,pizzaDto.Preco);
-            _context.Pizzas.Add(p1);
+            Pizza pizza = new Pizza
+            (
+                pizzaDto.Nome,
+                pizzaDto.FotoURL,
+                pizzaDto.Preco,
+                pizzaDto.TamanhoId
+            );
+            _context.Add(pizza);
             _context.SaveChanges();
+
+            foreach (var saborId in pizzaDto.SaboresId)
+            {
+                var s = new PizzaSabor(pizza.Id,saborId);
+                _context.PizzasSabores.Add(s);
+                _context.SaveChanges();
+            }
             return RedirectToAction(nameof(Index));
         }
 
+
+
+
+        public void DadosDropDown()
+        {
+            var result = new PostPizzaDropdownDTO()
+            {
+                Sabores = _context.Sabores.OrderBy(x => x.Nome).ToList(),
+                Tamanhos = _context.Tamanhos.OrderBy(x => x.Nome).ToList()
+            };
+            ViewBag.Sabores = new SelectList(result.Sabores, "Id", "Nome");
+            ViewBag.Tamanhos = new SelectList(result.Tamanhos, "Id", "Nome");
+        }
     }
 }

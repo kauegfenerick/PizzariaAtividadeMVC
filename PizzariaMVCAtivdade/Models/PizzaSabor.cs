@@ -7,6 +7,12 @@ namespace PizzariaMVCAtivdade.Models
 {
     public class PizzaSabor
     {
+        public PizzaSabor(int pizzaId, int saborId)
+        {
+            PizzaId = pizzaId;
+            SaborId = saborId;
+        }
+
         public Pizza Pizza { get; set; }
         public int PizzaId { get; set; }
 

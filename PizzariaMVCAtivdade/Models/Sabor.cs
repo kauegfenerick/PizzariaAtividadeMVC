@@ -8,11 +8,10 @@ namespace PizzariaMVCAtivdade.Models
 {
     public class Sabor : IEntidade
     {
-        public Sabor(string nome)
+        public Sabor(string nome, string fotoURL)
         {
-            DataCadastro = DateTime.Now;
-            DataAlteracao = DataCadastro;
-            Nome = nome;       
+            Nome = nome;
+            FotoURL = fotoURL;
         }
 
         // Contrato entidade
@@ -27,11 +26,14 @@ namespace PizzariaMVCAtivdade.Models
 
         public string Nome { get; set; }
 
+        public string FotoURL { get; set; }
+
         public List<PizzaSabor> PizzaSabores { get; set; }
 
-        public void AtualizarDados(string nome)
+        public void AtualizarDados(string nome, string fotoURL)
         {
             Nome = nome;
+            FotoURL = fotoURL;
             DataAlteracao = DateTime.Now;
         }
     }

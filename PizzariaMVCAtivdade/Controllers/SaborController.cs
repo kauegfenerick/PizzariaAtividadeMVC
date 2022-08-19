@@ -27,7 +27,7 @@ namespace PizzariaMVCAtivdade.Controllers
         public IActionResult Criar(PostSaborDTO saborDto)
         {
             if (!ModelState.IsValid) return View(saborDto);
-            Sabor s1 = new Sabor(saborDto.Nome);
+            Sabor s1 = new Sabor(saborDto.Nome,saborDto.FotoURL);
             _context.Add(s1);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -43,7 +43,7 @@ namespace PizzariaMVCAtivdade.Controllers
         public IActionResult ConfirmarAtualizar(int id, PostSaborDTO saborDto)
         {
             var result = _context.Sabores.FirstOrDefault(s => s.Id == id);
-            result.AtualizarDados(saborDto.Nome);
+            result.AtualizarDados(saborDto.Nome, saborDto.FotoURL);
             _context.Sabores.Update(result);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));

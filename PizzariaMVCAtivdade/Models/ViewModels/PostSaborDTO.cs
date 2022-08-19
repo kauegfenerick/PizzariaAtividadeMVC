@@ -8,5 +8,7 @@ namespace PizzariaMVCAtivdade.Models.ViewModels
     public class PostSaborDTO
     {
         public string Nome { get; set; }
+
+        public string FotoURL { get; set; }
     }
 }

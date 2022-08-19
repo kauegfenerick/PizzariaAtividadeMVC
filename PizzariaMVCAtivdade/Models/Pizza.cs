@@ -9,24 +9,14 @@ namespace PizzariaMVCAtivdade.Models
 {
     public class Pizza : IEntidade
     {
-        public Pizza(string fotoURL, decimal preco, Tamanho tamanho, int tamanhoId, List<PizzaSabor> pizzaSabores)
-        {
-            DataCadastro = DateTime.Now;
-            DataAlteracao = DataCadastro;
-            FotoURL = fotoURL;
-            Preco = preco;
-            Tamanho = tamanho;
-            TamanhoId = tamanhoId;
-            PizzaSabores = pizzaSabores;
-        }
-
-        public Pizza( string nome, string fotoURL, decimal preco)
+        public Pizza(string nome, string fotoURL, decimal preco, int tamanhoId)
         {
             DataCadastro = DateTime.Now;
             DataAlteracao = DataCadastro;
             Nome = nome;
             FotoURL = fotoURL;
             Preco = preco;
+            TamanhoId = tamanhoId;
         }
 
         //Contrato entidade
