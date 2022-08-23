@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PizzariaMVCAtivdade.Models;
 using PizzariaMVCAtivdade.Models.ViewModels;
 using System;
@@ -24,10 +25,14 @@ namespace PizzariaMVCAtivdade.Controllers
         }
         public IActionResult Detalhes(int id)
         {
-            var result = _context.Pizzas.FirstOrDefault(x => x.Id == id);
+            var result = _context.Pizzas
+                .Include(t => t.Tamanho)
+                .Include(ps => ps.PizzaSabores).ThenInclude(c => c.Sabor)
+                .FirstOrDefault(p => p.Id == id);
+
             return View(result);
         }
-        public IActionResult Criar(int id)
+        public IActionResult Criar()
         {
             DadosDropDown();
             return View();
@@ -55,7 +60,73 @@ namespace PizzariaMVCAtivdade.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Atualizar(int id)
+        {
+            var result = _context.Pizzas
+                .Include(x => x.PizzaSabores).ThenInclude(x => x.Sabor)
+                .FirstOrDefault(x => x.Id == id);
 
+            if (result == null)
+                return View("NotFound");
+
+            var response = new PostPizzaDTO()
+            {
+                Nome = result.Nome,
+                FotoURL = result.FotoURL,
+                Preco = result.Preco,
+                TamanhoId = result.TamanhoId,
+                SaboresId = result.PizzaSabores.Select(x => x.SaborId).ToList()
+            };
+
+            DadosDropDown();
+            return View(response);
+        }
+
+        [HttpPost, ActionName("Atualizar")]
+        public IActionResult ConfirmarAtualizar(int id, PostPizzaDTO pizzaDto)
+        {
+            var result = _context.Pizzas.FirstOrDefault(x => x.Id == id);
+
+            if (!ModelState.IsValid)
+            {
+                DadosDropDown();
+                return View(result);
+            }
+
+            result.AtualizarDados
+                (
+                pizzaDto.Nome,
+                pizzaDto.FotoURL,
+                pizzaDto.Preco,
+                pizzaDto.TamanhoId
+                );
+
+            _context.Update(result);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Detalhes), result);
+        }
+
+        public IActionResult Deletar(int id)
+        {
+            var result = _context.Pizzas.FirstOrDefault(x => x.Id == id);
+
+            if (result == null)
+                return View("NotFound");
+
+            return View(result);
+        }
+
+        [HttpPost, ActionName("Deletar")]
+        public IActionResult ConfirmarDeletar(int id)
+        {
+            var result = _context.Pizzas.FirstOrDefault(x => x.Id == id);
+
+            _context.Remove(result);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
 
 
         public void DadosDropDown()

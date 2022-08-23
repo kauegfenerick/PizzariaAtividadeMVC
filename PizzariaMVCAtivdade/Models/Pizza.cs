@@ -41,7 +41,14 @@ namespace PizzariaMVCAtivdade.Models
 
          public List<PizzaSabor> PizzaSabores { get; set; }
 
-
+        public void AtualizarDados(string nome, string fotoUrl, decimal preco, int tamanhoId)
+        {
+            Nome = nome;
+            FotoURL = fotoUrl;
+            DataAlteracao = DateTime.Now;
+            Preco = preco;
+            TamanhoId = tamanhoId;
+        }
 
     }
 }

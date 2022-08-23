@@ -1,5 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Pizza
+
 @{
+    ViewData["Title"] = "Detalhes da Pizza";
 }
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Nome
+                                <a class="text-white float-right" asp-action="Atualizar" asp-route-id="@Model.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="@Model.FotoURL" width="100%" alt="@Model.Nome">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>Tamanho: </b>
+                            <a asp-controller="Cinemas" asp-action="Detalhes" asp-route-id="@Model.Tamanho">
+                                @Model.Tamanho.Nome
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <b>Sabores: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach (var pizzaSabor in Model.PizzaSabores)
+                                {
+                                    <div class="column text-center">
+                                        <img src="@pizzaSabor.Sabor.FotoURL" style="max-width: 150px" />
+                                        <br />
+                                        <a asp-controller="Atores" asp-action="Detalhes" asp-route-id="@pizzaSabor.Sabor.Id">@pizzaSabor.Sabor.Nome</a>
+                                    </div>
+                                }
+                            </div>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
